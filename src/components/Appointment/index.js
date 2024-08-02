@@ -9,6 +9,9 @@ import Show from "components/Appointment/Show";
 
 import useVisualMode from "hooks/useVisualMode";
 
+const EMPTY = "EMPTY";
+const SHOW = "SHOW";
+
 export default function Appointment(props) {
   return (
     <article className="appointment" data-testid="appointment">
