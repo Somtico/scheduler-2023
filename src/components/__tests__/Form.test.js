@@ -11,9 +11,11 @@ describe("Form", () => {
     {
       id: 1,
       student: "Sylvia Palmer",
-      avatar: "https://i.imgur.com/LpaY82x.png"
-    }
+      avatar: "https://i.imgur.com/LpaY82x.png",
+    },
   ];
+
+  const { getByPlaceholderText } = render(<Form interviewers={interviewers} />);
 
   it("renders without student name if not provided", () => {
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
