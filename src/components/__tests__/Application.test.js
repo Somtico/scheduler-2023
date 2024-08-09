@@ -7,10 +7,10 @@ import Application from "components/Application";
 afterEach(cleanup);
 
 it("defaults to Monday and changes the schedule when a new day is selected", () => {
-  const { queryByText, findByText } = render(<Application />);
+  const { queryByText, getByText, findByText } = render(<Application />);
 
   return findByText("Monday").then(() => {
-    fireEvent.click(queryByText("Tuesday"));
+    fireEvent.click(getByText("Tuesday"));
     expect(queryByText("Leopold Silvers")).toBeInTheDocument();
   });
 });
