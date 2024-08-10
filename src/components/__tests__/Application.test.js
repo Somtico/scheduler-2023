@@ -10,6 +10,7 @@ import {
   getByAltText,
   getByPlaceholderText,
   getByText,
+  queryByText
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -50,6 +51,8 @@ describe("Application", () => {
 
     await findByText(appointment, "Lydia Miller-jones");
 
-    console.log(prettyDOM(appointment));
+    const day = getAllByTestId(container, "day").find((day) => queryByText(day, "Monday"));
+
+    console.log(prettyDOM(day));
   });
 });
