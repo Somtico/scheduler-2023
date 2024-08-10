@@ -48,6 +48,8 @@ describe("Application", () => {
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
+    await findByText(appointment, "Lydia Miller-jones");
+
     console.log(prettyDOM(appointment));
   });
 });
