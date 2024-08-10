@@ -51,7 +51,8 @@ describe("Application", () => {
 
     await findByText(appointment, "Lydia Miller-jones");
 
-    const day = getAllByTestId(container, "day").find((day) => queryByText(day, "Monday"));
+    const day = getAllByTestId(container, "day").find((day) => queryByText(day, "Monday"))
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
 
     console.log(prettyDOM(day));
   });
