@@ -52,6 +52,7 @@ describe("Application", () => {
     const day = getAllByTestId(container, "day").find((day) =>
       queryByText(day, "Monday")
     );
+    
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
 });
