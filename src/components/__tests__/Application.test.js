@@ -4,13 +4,12 @@ import {
   render,
   cleanup,
   fireEvent,
-  prettyDOM,
   findByText,
   getAllByTestId,
   getByAltText,
   getByPlaceholderText,
   getByText,
-  queryByText
+  queryByText,
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -33,7 +32,6 @@ describe("Application", () => {
     await findByText(container, "Archie Cohen");
 
     const appointments = getAllByTestId(container, "appointment");
-    // console.log(prettyDOM(appointments));
 
     const appointment = appointments[0];
 
@@ -51,9 +49,9 @@ describe("Application", () => {
 
     await findByText(appointment, "Lydia Miller-jones");
 
-    const day = getAllByTestId(container, "day").find((day) => queryByText(day, "Monday"))
+    const day = getAllByTestId(container, "day").find((day) =>
+      queryByText(day, "Monday")
+    );
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
-
-    debug(prettyDOM(day));
   });
 });
