@@ -12,6 +12,7 @@ import {
   queryByText,
   getByTestId,
   findByAltText,
+  getByDisplayValue,
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -106,5 +107,44 @@ describe("Application", () => {
 
     // 9. Check that the DayListItem with the text "Monday" also has the text "2 spots remaining".
     expect(queryByText(day, "2 spots remaining")).toBeInTheDocument();
+  });
+
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+    // 1. Render the Application.
+    const { container } = render(<Application />);
+
+    // 2. Wait until the text "Archie Cohen" is displayed.
+    await findByText(container, "Archie Cohen");
+
+    // 3. Check that the DayListItem with the text "Monday" also has the text "1 spot remaining".
+    const day = getAllByTestId(container, "day").find((day) =>
+      queryByText(day, "Monday")
+    );
+
+    expect(queryByText(day, "1 spot remaining")).toBeInTheDocument();
+
+    // 4. Click the "Edit" button on the first booked appointment.
+    const appointment = getAllByTestId(container, "appointment").find(
+      (appointment) => queryByText(appointment, "Archie Cohen")
+    );
+
+    fireEvent.click(getByAltText(appointment, "Edit"));
+
+    // 5. Change the name.
+    fireEvent.change(getByDisplayValue(appointment, "Archie Cohen"), {
+      target: { value: "Somto Ufondu" },
+    });
+
+    // 6. Click the "Save" button.
+    fireEvent.click(getByText(appointment, "Save"));
+
+    // 7. Check that the element with the text "Saving" is displayed.
+    expect(queryByText(appointment, "Saving")).toBeInTheDocument();
+
+    // 8. Wait until the element with the "Somto Ufondu" button is displayed.
+    await findByText(appointment, "Somto Ufondu");
+
+    // 9. Check that the DayListItem with the text "Monday" also has the text "1 spot remaining".
+    expect(queryByText(day, "1 spot remaining")).toBeInTheDocument();
   });
 });
